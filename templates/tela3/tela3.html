@@ -6,13 +6,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./asstes/img/icone.png" type="image/x-icon">
     <title>Buzz Quizz</title>
-    <link rel="stylesheet" href="./assets/css/reset.css">
-    <link rel="stylesheet" href="./assets/css/global.css">
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/global.css">
+    <link rel="stylesheet" href="tela3.css">
 </head>
 <body>
     <header>
         <h1>BuzzQuizz</h1>
     </header>
-    
+
+    <section class="formulario">
+        <h1>Comece pelo começo</h1>
+        <div class="caixa-formulario">
+            <input type="text" name="tipo" placeholder="Título do seu quizz">
+            <input type="text" name="imagem" placeholder="URL da imagem do seu quizz">
+            <input type="text" name="perguntas" placeholder="Quantidade de perguntas do quizz">
+            <input type="text" name="niveis" placeholder="Quantidade de níveis do quizz">
+        </div>
+        <button class="botao-color">Prosseguir pra criar perguntas</button>
+    </section>
+    <section class="formulario">
+        <h1>Crie suas perguntas</h1>
+        <div class="caixa-formulario">
+            <label for="pergunta">Pergunta 1</label>
+            <input type="text" name="pergunta" placeholder="Texto da pergunta">
+            <input type="text" name="cor" placeholder="Cor de fundo da pergunta">
+
+            <label for="pergunta">Resposta correta</label>
+            <input type="text" name="correta" placeholder="Resposta correta">
+            <input type="text" name="imagem" placeholder="URL da imagem">
+
+            <label for="pergunta">Respostas incorretas</label>
+            <input type="text" name="correta" placeholder="Resposta incorreta 1">
+            <input type="text" name="imagem" placeholder="URL da imagem 1">
+
+            <div class="espaco"></div>
+            <input type="text" name="correta" placeholder="Resposta incorreta 2">
+            <input type="text" name="imagem" placeholder="URL da imagem 2">
+
+            <div class="espaco"></div>
+            <input type="text" name="correta" placeholder="Resposta incorreta 3">
+            <input type="text" name="imagem" placeholder="URL da imagem 3">
+        </div>
+
+        <div class="caixa-formulario recolhido">
+            <label for="pergunta">Pergunta 2</label>
+            <ion-icon name="create-outline"></ion-icon>
+        </div>
+
+        <div class="caixa-formulario recolhido">
+            <label for="pergunta">Pergunta 3</label>
+            <ion-icon name="create-outline"></ion-icon>
+        </div>
+        <button class="botao-color">Prosseguir pra criar níveis</button>
+    </section>
+    <section class="formulario">
+        <h1>Agora, decida os níveis</h1>
+        <div class="caixa-formulario">
+            <label for="nivel">Nível 1</label>
+            <input type="text" name="nivel" placeholder="Título do nível">
+            <input type="text" name="acerto" placeholder="% de acerto mínima">
+            <input type="text" name="imagem" placeholder="URL da imagem do nível">
+            <input type="text" name="descrição" placeholder="Descrição do nível">
+        </div>
+
+        <div class="caixa-formulario recolhido">
+            <label for="nivel">Nível 2</label>
+            <ion-icon name="create-outline"></ion-icon>
+        </div>
+
+        <div class="caixa-formulario recolhido">
+            <label for="nivel">Nível 3</label>
+            <ion-icon name="create-outline"></ion-icon>
+        </div>
+        <button class="botao-color">Finalizar Quizz</button>
+    </section>
+
+    <section class="formulario">
+        <h1>Seu quizz está pronto!</h1>
+        <div class="caixa-formulario img-fundo">
+            <p>O quão Potterhead é você?</p>            
+        </div>
+        <button class="botao-color quizz-pronto">Finalizar Quizz</button>
+        <button class="botao-retorno">Voltar pra home</button>
+    </section>
+
+
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

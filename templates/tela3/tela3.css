@@ -1,0 +1,142 @@
+.formulario{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.caixa-formulario{
+    display: flex;
+    flex-direction: column;    
+    background-color: blue;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.formulario h1{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    margin: 20px;
+}
+
+.formulario input{
+    width: 564px;
+    height: 46px;
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-input);
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.formulario input::placeholder{
+    color: var(--cinza-input);
+    padding-left: 15px;
+    font-family: var(--);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+}
+
+.formulario label{   
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 10px 5px;  
+}
+
+.formulario .recolhido{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 601px;
+    box-sizing: border-box;
+}
+
+.formulario ion-icon{
+    height: 23px;
+    width: 26px;
+}
+
+.espaco{
+    margin: 10px;
+}
+
+.quizz-pronto{
+    width: 220.32px;
+    height: 44px;
+}
+
+.formulario .img-fundo{
+    width: 500px;
+    height: 266px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(https://wallpaperboat.com/wp-content/uploads/2020/08/12/52469/hogwarts-castle-11.jpg);
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    display: flex;
+    justify-content: end;
+    color: var(--branco);
+}
+
+.formulario .img-fundo p{
+    margin: 20px;
+}
+
+@media screen and (max-width: 1100px) {
+
+    .banner{
+        height: 142px; 
+        margin-top: 69px;       
+    }
+    
+    .caixa-formulario{
+        width: 375px;       
+    }  
+    
+    .formulario h1{
+        font-size: 20px;
+    }
+    
+    .formulario input{
+        width: 95%;
+    }
+    
+    .formulario label{   
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        margin: 10px 5px;  
+    }
+    
+    .formulario .recolhido{
+        width: 395px;
+    }
+    
+    .formulario ion-icon{
+        height: 23px;
+        width: 26px;
+    }
+    
+    .espaco{
+        margin: 10px;
+    }
+    
+    .quizz-pronto{
+        width: 220.32px;
+        height: 44px;
+    }
+    
+    .formulario .img-fundo{
+        width: 340px;
+        height: 181px;
+    }
+    
+    .formulario .img-fundo p{
+        margin: 20px;
+        font-size: 20px;
+    }
+}

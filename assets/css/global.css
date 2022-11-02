@@ -14,6 +14,7 @@
 
 body{
     background-color: var(--cinza-fundo);
+    font-family: var(--fonte-principal);
 }
 
 header{
@@ -30,14 +31,12 @@ header{
 }
 
 header h1{
-    color: var(--branco);
-    font-family: var(--fonte-principal);
+    color: var(--branco);    
     font-size: 37px;
 }
 
 .botao-color{
     color: var(--cinza-botao1);
-    font-family: var(--fonte-principal);
     font-weight: 400;
     font-size: 18px;
     width: 324px;
@@ -51,7 +50,6 @@ header h1{
 
 .botao-retorno{
     color: var(--cinza-botao2);
-    font-family: var(--fonte-principal);
     font-weight: 400;
     font-size: 18px;
     width: 324px;
