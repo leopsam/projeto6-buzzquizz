@@ -8,17 +8,35 @@
     <title>Buzz Quizz</title>
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/global.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
     <header>
         <h1>BuzzQuizz</h1>
     </header>
-    <br>
-    <button class="botao-color">Acessar Quizz</button>
-    <br> <br>
-    <button class="botao-retorno">Voltar pra home</button>
-    
-
+    <main class="tela1">
+        <div class="tela1-noQuizz hidden">
+            <p>Você não criou nenhum<br>quizz ainda :(</p>
+            <button>Criar Quizz</button>
+        </div>
+        <article class="tela1-quizzUser">
+            <div class="tela1-containerTitle">
+                <h1>Seus Quizzes</h1>
+                <ion-icon name="add-circle"></ion-icon>
+            </div>
+            <div class="tela1-containerQuizz">
+            </div>
+        </article>
+        <article class="tela1-everyQuizz">
+            <div class="tela1-containerTitle">
+                <h1>Todos os Quizzes</h1>
+            </div>
+            <div class="tela1-containerQuizz">
+            </div>
+        </article>
+    </main>
     <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    ><script src="./assets/js/script.js"></script>
 </body>
 </html>
