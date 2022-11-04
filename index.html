@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./asstes/img/icone.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/img/icone.png" type="image/x-icon">
     <title>Buzz Quizz</title>
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/global.css">
@@ -14,27 +14,167 @@
     <header>
         <h1>BuzzQuizz</h1>
     </header>
-    <main class="tela1">
-        <div class="tela1-noQuizz hidden">
-            <p>Você não criou nenhum<br>quizz ainda :(</p>
-            <button>Criar Quizz</button>
-        </div>
-        <article class="tela1-quizzUser">
-            <div class="tela1-containerTitle">
-                <h1>Seus Quizzes</h1>
-                <ion-icon name="add-circle"></ion-icon>
+<!-------------------------------------------------------------------------------------------->
+       <main class="tela1">
+            <div class="selecao-tela1">
+                <div class="tela1-noQuizz">
+                    <p>Você não criou nenhum<br>quizz ainda :(</p>
+                    <button onclick="infoBasicoTela3()" class="criar-quizz">Criar Quizz</button>
+                </div>
+                <article class="tela1-quizzUser hidden">
+                    <div class="tela1-containerTitle ">
+                        <h1>Seus Quizzes</h1>
+                        <ion-icon name="add-circle"></ion-icon>
+                    </div>
+                    <div class="tela1-containerQuizz">
+                    </div>
+                </article>
+                <article class="tela1-everyQuizz">
+                    <div class="tela1-containerTitle">
+                        <h1>Todos os Quizzes</h1>
+                    </div>
+                    <div class="tela1-containerQuizz">
+                    </div>
+                </article>
             </div>
-            <div class="tela1-containerQuizz">
+        </main>
+<!---------------------------------TELAS PAGINA DE QUIZZ (TELA 2)-----------------------------> 
+        <main class="pagina-quizz tela2">
+            <div class="quizz-selecionado hidden">
+                <div class="banner">       
+                    <h2>O quão Potterhead é você?</h2>
+                </div>            
+                <div class="card-quizz">
+                    <h3>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</h3>
+                    <div class="respostas">
+                        <div class="item certo-errado-desmarcado">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXq_UovhRqnM96mGBIlrvg80vAinWuq0Vw&usqp=CAU" />
+                            <p>Gatíneo</p>
+                        </div>
+                        <div class="certo-marcado item">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXq_UovhRqnM96mGBIlrvg80vAinWuq0Vw&usqp=CAU" />
+                            <p class="certo-marcado">Gatíneo</p>
+                        </div>
+                        <div class="item errado-marcado">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXq_UovhRqnM96mGBIlrvg80vAinWuq0Vw&usqp=CAU" />
+                            <p>Gatíneo</p>
+                        </div>
+                        <div class="item certo-errado-desmarcado">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXq_UovhRqnM96mGBIlrvg80vAinWuq0Vw&usqp=CAU" />
+                            <p>Gatíneo</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </article>
-        <article class="tela1-everyQuizz">
-            <div class="tela1-containerTitle">
-                <h1>Todos os Quizzes</h1>
+
+            <div class="fim-quizz hidden">
+                <h3>88% de acerto: Você é praticamente um aluno de Hogwarts!</h3> 
+                <div class="container">        
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXq_UovhRqnM96mGBIlrvg80vAinWuq0Vw&usqp=CAU" />
+                    <p>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</p>                
+            
+                </div>  
             </div>
-            <div class="tela1-containerQuizz">
-            </div>
-        </article>
-    </main>
+        </main>
+<!-------------------------------TELAS DE CRIAÇÃO DO QUIZZ (TELA 3)--------------------------->   
+        <main class="criacao-quiz tela3">
+            <section class=" formulario info-basico hidden"> <!--Tela 3.1 - Info básica do Quiz-->
+                <h1>Comece pelo começo</h1>
+                <div class="caixa-formulario centralizando-filho">
+                    <input type="text" name="tipo" placeholder="Título do seu quizz">
+                    <input type="text" name="imagem" placeholder="URL da imagem do seu quizz">
+                    <input type="text" name="perguntas" placeholder="Quantidade de perguntas do quizz">
+                    <input type="text" name="niveis" placeholder="Quantidade de níveis do quizz">
+                </div>
+                <button onclick="perguntasTela3()" class="botao-color">Prosseguir pra criar perguntas</button>
+            </section>
+
+            <section class="formulario perguntas-quiz hidden"> <!--Tela 3.2 - Perguntas do Quiz-->
+                <h1>Crie suas perguntas</h1>
+                <div class="caixa-formulario">
+
+                    <label for="pergunta">Pergunta 1</label>
+                    <div class="centralizando-filho">
+                        <input type="text" name="pergunta" placeholder="Texto da pergunta">
+                        <input type="text" name="cor" placeholder="Cor de fundo da pergunta">
+                    </div>
+
+                    <label for="pergunta">Resposta correta</label>
+                    <div class="centralizando-filho">
+                        <input type="text" name="correta" placeholder="Resposta correta">
+                        <input type="text" name="imagem" placeholder="URL da imagem">
+                    </div>
+
+                    <label for="pergunta">Respostas incorretas</label>
+                    <div class="centralizando-filho">
+                        <input type="text" name="correta" placeholder="Resposta incorreta 1">
+                        <input type="text" name="imagem" placeholder="URL da imagem 1">
+                    </div>
+
+                    <div class="espaco"></div>
+
+                    <div class="centralizando-filho">
+                        <input type="text" name="correta" placeholder="Resposta incorreta 2">
+                        <input type="text" name="imagem" placeholder="URL da imagem 2">
+                    </div>
+
+                    <div class="espaco"></div>
+                    <div class="centralizando-filho">
+                        <input type="text" name="correta" placeholder="Resposta incorreta 3">
+                        <input type="text" name="imagem" placeholder="URL da imagem 3">
+                    </div>
+                </div>
+        
+                <div class="caixa-formulario recolhido">
+                    <label for="pergunta">Pergunta 2</label>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+        
+                <div class="caixa-formulario recolhido">
+                    <label for="pergunta">Pergunta 3</label>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <button onclick="niveisTela3()" class="botao-color">Prosseguir pra criar níveis</button>
+            </section>
+
+            <section class="formulario niveis-quiz hidden"> <!--Tela 3.3 - Níveis do Quiz-->
+                <h1>Agora, decida os níveis</h1>
+                <div class="caixa-formulario">
+                    <label for="nivel">Nível 1</label>
+                    <div class="centralizando-filho">
+                        <input type="text" name="nivel" placeholder="Título do nível">
+                        <input type="text" name="acerto" placeholder="% de acerto mínima">
+                        <input type="text" name="imagem" placeholder="URL da imagem do nível">
+                        <input type="text" name="descrição" placeholder="Descrição do nível">
+                    </div>
+                </div>
+        
+                <div class="caixa-formulario recolhido">
+                    <label for="nivel">Nível 2</label>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+        
+                <div class="caixa-formulario recolhido">
+                    <label for="nivel">Nível 3</label>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <button onclick="sucessoTela3()" class="botao-color">Finalizar Quizz</button>
+            </section>
+
+            <section class="formulario sucesso-quiz hidden"> <!--Tela 3.4 - Sucesso do Quiz-->
+                <h1>Seu quizz está pronto!</h1>
+                <div class="caixa-formulario img-fundo">
+                    <p>O quão Potterhead é você?</p>            
+                </div>
+                <button class="botao-color quizz-pronto">Finalizar Quizz</button>
+                <button onclick="voltarHome()" class="botao-retorno">Voltar pra home</button>
+            </section>
+        </main>
+
+
+
+
+
     <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     ><script src="./assets/js/script.js"></script>

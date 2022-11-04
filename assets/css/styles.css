@@ -1,7 +1,7 @@
-main.tela1 {
+/*main.tela1 {
     padding-top: 100px;
     padding-bottom: 100px;
-}
+}*/
 
 .tela1-noQuizz {
     width: 100%;
@@ -16,6 +16,7 @@ main.tela1 {
     align-items: center;
     justify-content: center;
     gap: 25px;
+    margin-top: 100px;
 }
 
 .tela1-noQuizz p {
@@ -106,13 +107,244 @@ article .tela1-containerQuizz {
     word-wrap: break-word;
 }
 
-.hidden {
-    display: none;
-}
-
 .tela1-everyQuizz {
     margin-top: 48px;
 } 
+
+/*--------TELAS PAGINA DE QUIZZ (TELA 2)--------*/
+.banner{
+    margin-top: 69px;
+    width: 100vw;
+    height: 227px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)), url(https://wallpaperboat.com/wp-content/uploads/2020/08/12/52469/hogwarts-castle-11.jpg);
+}
+
+.banner h2{
+    font-family: var(--fonte-principal);
+    font-weight: 400;
+    font-size: 39px; /*mudar para 19 mobile*/ 
+    color: var(--branco);
+}
+
+.quizz-selecionado{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.pagina-quizz{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.card-quizz{
+    background-color: var(--branco);
+    width: 759px;
+    height: 676px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    margin: 20px 0;
+}
+
+.card-quizz h3{
+    margin: 20px auto 10px;
+    width: 688.16px;
+    height: 137.99px;
+    background: #434CA0;
+    font-family: var(--fonte-principal);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    color: var(--branco);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-quizz .respostas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.card-quizz .respostas .item{
+    margin: 15px;
+}
+
+.card-quizz .respostas img{
+    width: 330px;
+    height: 175px;
+}
+
+.card-quizz .respostas p{
+    font-family: var(--fonte-principal);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin-top: 10px;
+}
+
+.certo-errado-desmarcado{
+    opacity: 0.3;    
+}
+
+.certo-marcado{
+    color: var(--msg-correta); 
+}
+
+.errado-marcado{
+    color: var(--msg-errada); 
+}
+
+.fim-quizz{
+    margin: 20px 0;
+    width: 759px;
+    height: 430px;
+    background-color: var(--branco);    
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);   
+}
+
+.fim-quizz h3{
+    margin: 16px auto 16px;
+    width: 727px;
+    height: 99px;
+    background: #434CA0;
+    font-family: var(--fonte-principal);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    color: var(--branco);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fim-quizz .container{
+    display: flex;
+    width: 727px;
+    margin: 0 auto;    
+}
+
+.fim-quizz img{
+    width: 364px;
+    height: 273px;
+    margin-right: 16px;
+}
+
+.fim-quizz p{
+    font-family: var(--fonte-principal);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 25px;   
+    color: #484848;
+}
+
+/*--------TELAS DE CRIAÇÃO DO QUIZZ (TELA 3)--------*/
+.formulario{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.caixa-formulario{
+    display: flex;
+    flex-direction: column;    
+    background-color: var(--cinza-input); /*888*/
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.centralizando-filho{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario h1{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    margin: 20px;
+}
+
+.formulario input{
+    width: 564px;
+    height: 46px;
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-input);
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.formulario input::placeholder{
+    color: var(--cinza-input);
+    padding-left: 15px;
+    font-family: var(--);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+}
+
+.formulario label{   
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 10px 5px;  
+}
+
+.formulario .recolhido{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 601px;
+    box-sizing: border-box;
+}
+
+.formulario ion-icon{
+    height: 23px;
+    width: 26px;
+}
+
+.espaco{
+    margin: 10px;
+}
+
+.quizz-pronto{
+    width: 220.32px;
+    height: 44px;
+}
+
+.formulario .img-fundo{
+    width: 500px;
+    height: 266px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(https://wallpaperboat.com/wp-content/uploads/2020/08/12/52469/hogwarts-castle-11.jpg);
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    display: flex;
+    justify-content: end;
+    color: var(--branco);
+}
+
+.formulario .img-fundo p{
+    margin: 20px;
+}
+
+.hidden{
+    display: none;
+}
 
 @media (min-width: 1100px){
     main.tela1 {
@@ -125,7 +357,6 @@ article .tela1-containerQuizz {
     article .tela1-containerTitle {
         width: 178px;
     }
-
 }
 
 @media (min-width: 712px){
@@ -141,4 +372,130 @@ article .tela1-containerQuizz {
     .tela1-noQuizz {
         max-width: 1050px;
     }
+}
+
+
+
+        
+@media screen and (max-width: 1100px) {
+
+    /*--------TELAS DE CRIAÇÃO DO QUIZZ (TELA 3)--------*/    
+    .formulario h1{
+        font-size: 20px;
+    }
+    
+    .formulario input{
+        width: 95%;
+    }
+
+    .caixa-formulario{
+        width: 100%;       
+    }  
+    
+    .formulario label{   
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        margin: 10px 5px;  
+    }
+    
+    .formulario .recolhido{
+        width: 100%;
+    }
+    
+    .formulario ion-icon{
+        height: 23px;
+        width: 26px;
+    }
+    
+    .espaco{
+        margin: 10px;
+    }
+    
+    .quizz-pronto{
+        width: 220.32px;
+        height: 44px;
+    }
+    
+    .formulario .img-fundo{
+        width: 340px;
+        height: 181px;
+    }
+    
+    .formulario .img-fundo p{
+        margin: 20px;
+        font-size: 20px;
+    }
+
+    /*--------TELAS PAGINA DE QUIZZ (TELA 2)--------*/    
+    .banner{
+        height: 142px; 
+        margin-top: 69px;       
+    }
+
+    .banner h2{
+        font-size: 19px;
+    }
+
+    .card-quizz{       
+        width: 375px;
+        height: 436px;
+    }
+    
+    .card-quizz h3{
+        text-align: center;
+        width: 340px;
+        height: 89px;       
+        font-size: 19px;
+        margin: 20px auto 7px;        
+    }
+    
+    .card-quizz .respostas .item{
+        margin: 7px;
+    }
+    
+    .card-quizz .respostas img{
+        width: 163px;
+        height: 113px;
+    }
+    
+    .card-quizz .respostas p{
+        font-size: 13px;  
+    }
+
+    .fim-quizz{
+        width: 375px;
+        height: 500px;
+        margin-bottom: 200px;
+    }
+
+    .fim-quizz h3{
+        text-align: center;
+        margin: 16px auto 10px;
+        width: 340px;
+        height: 99px;
+        font-size: 19px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .fim-quizz .container{
+        display: flex;
+        flex-direction: column;
+        width: 340px;
+        margin: 0 auto;    
+    }
+
+    .fim-quizz img{
+        width: 340px;
+        height: 255px;
+    }
+
+    .fim-quizz p{  
+        margin-top: 15px;
+        line-height: 20px;      
+        font-size: 17px;        
+    }
+
+
 }

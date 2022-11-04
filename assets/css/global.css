@@ -12,13 +12,10 @@
     --fonte-principal: 'Roboto', sans-serif;
 }
 
-* {
-    box-sizing: border-box;
-    font-family: var(--fonte-principal);
-}
-
 body{
     background-color: var(--cinza-fundo);
+    box-sizing: border-box;
+    font-family: var(--fonte-principal);
 }
 
 header{
@@ -68,3 +65,4 @@ header h1{
 .botao-color:hover{
     background-color: #d43129;
 }
+
