@@ -16,7 +16,6 @@
     </header>
 <!-------------------------------------------------------------------------------------------->
        <main class="tela1">
-            <div class="selecao-tela1">
                 <div class="tela1-noQuizz">
                     <p>Você não criou nenhum<br>quizz ainda :(</p>
                     <button onclick="infoBasicoTela3()" class="criar-quizz">Criar Quizz</button>
@@ -36,11 +35,10 @@
                     <div class="tela1-containerQuizz">
                     </div>
                 </article>
-            </div>
         </main>
 <!---------------------------------TELAS PAGINA DE QUIZZ (TELA 2)-----------------------------> 
-        <main class="pagina-quizz tela2">
-            <div class="quizz-selecionado hidden">
+        <main class="pagina-quizz tela2 hidden">
+            <div class="quizz-selecionado">
                 <div class="banner">       
                     <h2>O quão Potterhead é você?</h2>
                 </div>            
@@ -86,7 +84,7 @@
                     <input type="text" name="perguntas" placeholder="Quantidade de perguntas do quizz">
                     <input type="text" name="niveis" placeholder="Quantidade de níveis do quizz">
                 </div>
-                <button onclick="perguntasTela3()" class="botao-color">Prosseguir pra criar perguntas</button>
+                <button onclick="infoCadastroQuizz()" class="botao-color">Prosseguir pra criar perguntas</button>
             </section>
 
             <section class="formulario perguntas-quiz hidden"> <!--Tela 3.2 - Perguntas do Quiz-->
@@ -170,10 +168,6 @@
                 <button onclick="voltarHome()" class="botao-retorno">Voltar pra home</button>
             </section>
         </main>
-
-
-
-
 
     <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

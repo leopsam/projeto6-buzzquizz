@@ -11,12 +11,20 @@ let answer = {
     image: "",
     isCorrectAnswer: true
 }
+
+let question = {
+    title: "",
+    color: "",
+    answers: []
+}
+
 let level = {
     title: "",
     image: "",
     text: "",
-    inValue: 0
+    minValue: 0
 }
+
 
 let quizzCreate = {
 	title: "",
@@ -40,11 +48,11 @@ let quizzCreate = {
 	],
 	levels: []
 }
+
 let = quizzUni = {};
 
 getLocalStorageQuizzes();
 getQuizzes();
-//createQuizz();
 
 
 function getLocalStorageQuizzes(){
@@ -68,30 +76,8 @@ function getQuizzes(){
 function getUniqueQuizz(id){
     let promisse = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`)
     promisse.then((response) => {
-        console.log(response.data)
         quizzUni = response.data;
-        quizzCreate = {
-            title: "",
-            image: "",
-            questions: [
-                {
-                    title: "",
-                    color: "",
-                    answers: []
-                },
-                {
-                    title: "",
-                    color: "",
-                    answers: []
-                },
-                {
-                    title: "",
-                    color: "",
-                    answers: []
-                }
-            ],
-            levels: []
-        }
+        quizzTela2()
     })
     promisse.catch((err)=> {
         console.log(err)
@@ -104,6 +90,28 @@ function createQuizz(){
         console.log(response.status)
             quizzesStorage.push(response.data)
             localStorage.setItem("quizzes", quizzesStorage)
+            quizzCreate = {
+                title: "",
+                image: "",
+                questions: [
+                    {
+                        title: "",
+                        color: "",
+                        answers: []
+                    },
+                    {
+                        title: "",
+                        color: "",
+                        answers: []
+                    },
+                    {
+                        title: "",
+                        color: "",
+                        answers: []
+                    }
+                ],
+                levels: []
+            }
     })
     promisse.catch((err) => {
         console.log(err)
@@ -117,8 +125,7 @@ function handleQuizzes(){
         noQuizzElemet.classList.add("hidden")        
         quizzesStorage.forEach(quizz => {
             quizzUserContainerElement.innerHTML += `
-            <div onclick="quizzTela2(this)" class="tela1-quizz">
-                <span class="hidden id-unitario">${quizz.id}</span>
+            <div onclick="getUniqueQuizz(${quizz.id})" class="tela1-quizz">
                 <img src="${quizz.image}" />
                 <div class="tela1-gradientQuizz"></div>
                 <p>${quizz.title}</p>
@@ -133,8 +140,7 @@ function handleQuizzes(){
 
         quizzes.forEach(quizz => {
             quizzEveryElement.innerHTML += `
-            <div onclick="quizzTela2(this)" class="tela1-quizz">
-                <span class="hidden id-unitario">${quizz.id}</span>
+            <div onclick="getUniqueQuizz(${quizz.id})" class="tela1-quizz">
                 <img src="${quizz.image}" />
                 <div class="tela1-gradientQuizz"></div>
                 <p>${quizz.title}</p>
@@ -149,22 +155,132 @@ function infoBasicoTela3(){
 	
 	let telaCriar = document.querySelector('.tela1-noQuizz');
     let telaInfoBasico = document.querySelector('.info-basico');
-    let quizzesUsuario = document.querySelector('.tela1-quizzUser');
-    let quizzesTodos = document.querySelector('.tela1-everyQuizz');
-    
+    let tela1 = document.querySelector('.tela1');
     telaCriar.classList.add('hidden');
     telaInfoBasico.classList.remove('hidden');
-    quizzesUsuario.classList.add('hidden');
-    quizzesTodos.classList.add('hidden');    
+    tela1.classList.add("hidden")    
 }
 
-function perguntasTela3(){		
+function perguntasTela3(dadosIniciais){		
 	
     let telaInfoBasico = document.querySelector('.info-basico');
     let perguntasQuiz = document.querySelector('.perguntas-quiz');
-    
+    perguntasQuizz(dadosIniciais)
     telaInfoBasico.classList.add('hidden');
-    perguntasQuiz.classList.remove('hidden');    
+    perguntasQuiz.classList.remove('hidden');
+}
+
+function infoCadastroQuizz(){
+    let tituloQuizz = document.querySelector(".info-basico input[name='tipo']").value
+    let imagemQuizz = document.querySelector(".info-basico input[name='imagem']").value
+    let qtdPerguntas = Number(document.querySelector(".info-basico input[name='perguntas']").value)
+    let qtdNiveis = Number(document.querySelector(".info-basico input[name='niveis']").value)
+    console.log(qtdNiveis)
+    if((tituloQuizz.length >=20) && (tituloQuizz.length <= 65) && imagemQuizz && qtdPerguntas >= 3 && qtdNiveis >= 2){
+        perguntasTela3({titulo: tituloQuizz, imagem: imagemQuizz, qtdPerguntas, qtdNiveis})
+    }
+}
+
+function perguntasQuizz(dados){
+    let perguntasQuizz = document.querySelector(".perguntas-quiz")
+    perguntasQuizz.innerHTML = ""
+    perguntasQuizz.innerHTML = `
+    <h1>Crie suas perguntas</h1>
+                <div class="caixa-formulario" id="1" onclick="abrirFormularioAoClicar(this, 1)">
+
+                    <label for="pergunta">Pergunta 1</label>
+                    <div class="centralizando-filho">
+                        <input type="text" name="pergunta" placeholder="Texto da pergunta">
+                        <input type="text" name="cor" placeholder="Cor de fundo da pergunta">
+                    </div>
+
+                    <label for="pergunta">Resposta correta</label>
+                    <div class="centralizando-filho">
+                        <input type="text" name="correta" placeholder="Resposta correta">
+                        <input type="text" name="imagem" placeholder="URL da imagem">
+                    </div>
+
+                    <label for="pergunta">Respostas incorretas</label>
+                    <div class="centralizando-filho">
+                        <input type="text" name="correta" placeholder="Resposta incorreta 1">
+                        <input type="text" name="imagem" placeholder="URL da imagem 1">
+                    </div>
+
+                    <div class="espaco"></div>
+
+                    <div class="centralizando-filho">
+                        <input type="text" name="correta" placeholder="Resposta incorreta 2">
+                        <input type="text" name="imagem" placeholder="URL da imagem 2">
+                    </div>
+
+                    <div class="espaco"></div>
+                    <div class="centralizando-filho">
+                        <input type="text" name="correta" placeholder="Resposta incorreta 3">
+                        <input type="text" name="imagem" placeholder="URL da imagem 3">
+                    </div>
+                </div>
+    `
+    for(let i=1; i<dados.qtdPerguntas; i++){
+        perguntasQuizz.innerHTML += `
+        <div class="caixa-formulario recolhido" id='${i+1}' onclick='abrirFormularioAoClicar(this, ${i+1})'>
+        <label for="pergunta">Pergunta ${i+1}</label>
+        <ion-icon name="create-outline"></ion-icon>
+        </div>
+        `   
+    }
+
+    perguntasQuizz.innerHTML += `<button onclick="niveisTela3()" class="botao-color">Prosseguir pra criar níveis</button>`
+}
+
+function abrirFormularioAoClicar(element, pergID){
+    let perguntasQuizzForm = document.querySelectorAll(".perguntas-quiz .caixa-formulario")
+   
+    perguntasQuizzForm.forEach(pergunta => {
+        if(pergunta.getAttribute("id") !== pergID){
+            pergunta.classList.add("recolhido")
+            pergunta.innerHTML = `
+            <label for="pergunta">Pergunta ${pergunta.getAttribute("id")}</label>
+            <ion-icon name="create-outline"></ion-icon>
+            `
+        }
+    })
+
+   
+    element.innerHTML = `
+    <div class="caixa-formulario" id="${pergID}">
+
+    <label for="pergunta">Pergunta ${pergID}</label>
+    <div class="centralizando-filho">
+        <input type="text" name="pergunta" placeholder="Texto da pergunta">
+        <input type="text" name="cor" placeholder="Cor de fundo da pergunta">
+    </div>
+
+    <label for="pergunta">Resposta correta</label>
+    <div class="centralizando-filho">
+        <input type="text" name="correta" placeholder="Resposta correta">
+        <input type="text" name="imagem" placeholder="URL da imagem">
+    </div>
+
+    <label for="pergunta">Respostas incorretas</label>
+    <div class="centralizando-filho">
+        <input type="text" name="correta" placeholder="Resposta incorreta 1">
+        <input type="text" name="imagem" placeholder="URL da imagem 1">
+    </div>
+
+    <div class="espaco"></div>
+
+    <div class="centralizando-filho">
+        <input type="text" name="correta" placeholder="Resposta incorreta 2">
+        <input type="text" name="imagem" placeholder="URL da imagem 2">
+    </div>
+
+    <div class="espaco"></div>
+    <div class="centralizando-filho">
+        <input type="text" name="correta" placeholder="Resposta incorreta 3">
+        <input type="text" name="imagem" placeholder="URL da imagem 3">
+    </div>
+</div>
+    `
 }
 
 function niveisTela3(){		
@@ -189,54 +305,40 @@ function voltarHome(){
     window.location.reload();
 }
 
-function quizzTela2(quizz){
+function quizzTela2(){
 
-    
-    
-    idSelecionado = document.querySelector('.id-unitario');
-    idSelecionado = idSelecionado.innerHTML;
-
-    let telaQuizz = document.querySelector('.quizz-selecionado');
-    let tela1 = document.querySelector('.selecao-tela1'); 
+    let tela2 = document.querySelector('.tela2');
+    let tela1 = document.querySelector('.tela1'); 
     let tela3 = document.querySelector('.tela3'); 
+    let quizzSelecionado = document.querySelector('.quizz-selecionado')
 
-    telaQuizz.classList.remove('hidden'); 
+    tela2.classList.remove('hidden');
     tela1.classList.add('hidden'); 
     tela3.classList.add('hidden');
 
-    let quizzUnitario = `
-        <div class="banner">       
-            <h2>${quizzUni.title}</h2>
-        </div>            
-        <div class="card-quizz">
-            <h3>${quizzUni.title}</h3>
-            <div class="respostas">
-                <div class="item certo-errado-desmarcado">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXq_UovhRqnM96mGBIlrvg80vAinWuq0Vw&usqp=CAU" />
-                    <p>Gatíneo</p>
-                </div>
-                <div class="certo-marcado item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXq_UovhRqnM96mGBIlrvg80vAinWuq0Vw&usqp=CAU" />
-                    <p class="certo-marcado">Gatíneo</p>
-                </div>
-                <div class="item errado-marcado">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXq_UovhRqnM96mGBIlrvg80vAinWuq0Vw&usqp=CAU" />
-                    <p>Gatíneo</p>
-                </div>
-                <div class="item certo-errado-desmarcado">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHmXq_UovhRqnM96mGBIlrvg80vAinWuq0Vw&usqp=CAU" />
-                    <p>Gatíneo</p>
-                </div>
-            </div>
-        </div>`
-        getUniqueQuizz(idSelecionado);
-        telaQuizz.innerHTML = quizzUnitario 
-
-        console.log(quizzUni)
-
+    quizzSelecionado.innerHTML = `<div class="banner">       
+    <h2>${quizzUni.title}</h2>
+    </div>`
     
+    for(let i=0; i<quizzUni.questions.length; i++){
+        quizzSelecionado.innerHTML+=`<div class="card-quizz">
+        <h3>${quizzUni.questions[i].title}</h3>
+        <div class="respostas">`
+        quizzSelecionado.innerHTML+=`
+        </div>
+    </div>`
+    let respostasElement = document.querySelectorAll(".respostas")[i]
+        quizzUni.questions[i].answers.forEach(resp => {
+            respostasElement.innerHTML += `
+            <div class="item">
+            <img src="${resp.image}" />
+            <p>${resp.text}</p>
+        </div>
+            `
+        })
+    }
 }
 
+function renderTela3(){
 
-
-
+}
