@@ -24,77 +24,17 @@ let level = {
     title: "",
     image: "",
     text: "",
-    minValue: 0
+    minValue: ""
 }
+
+let levels = []
 
 
 let quizzCreate =  {
-title: "Ps4 vs Xbox 3 meu",
-image: "https://www.teahub.io/photos/full/332-3321569_xbox-one-ps4-xbox-and-playstation-logos.jpg",
-questions: [
-    {
-        title: "Título da pergunta 1",
-        color: "#123456",
-        answers: [
-            {
-                text: "Texto da resposta 1",
-                image: "https://http.cat/411.jpg",
-                isCorrectAnswer: true
-            },
-            {
-                text: "Texto da resposta 2",
-                image: "https://http.cat/412.jpg",
-                isCorrectAnswer: false
-            }
-        ]
-    },
-    {
-        title: "Título da pergunta 2",
-        color: "#123456",
-        answers: [
-            {
-                text: "Texto da resposta 1",
-                image: "https://http.cat/411.jpg",
-                isCorrectAnswer: true
-            },
-            {
-                text: "Texto da resposta 2",
-                image: "https://http.cat/412.jpg",
-                isCorrectAnswer: false
-            }
-        ]
-    },
-    {
-        title: "Título da pergunta 3",
-        color: "#123456",
-        answers: [
-            {
-                text: "Texto da resposta 1",
-                image: "https://http.cat/411.jpg",
-                isCorrectAnswer: true
-            },
-            {
-                text: "Texto da resposta 2",
-                image: "https://http.cat/412.jpg",
-                isCorrectAnswer: false
-            }
-        ]
-    }
-],
-levels: [
-    {
-        title: "Título do nível 1",
-        image: "https://http.cat/411.jpg",
-        text: "Descrição do nível 1",
-        minValue: 0
-    },
-    {
-        title: "Título do nível 2",
-        image: "https://http.cat/412.jpg",
-        text: "Descrição do nível 2",
-        minValue: 50
-    }
-]
+title: "",
+image: "",
+questions: [],
+levels: []
 }
 
 let quizzInfoIniciais = {}
@@ -169,7 +109,6 @@ function createQuizz(){
     })
 }
 
-createQuizz()
 
 function handleQuizzes(){
     quizzEveryElement.innerHTML = ""
@@ -287,12 +226,13 @@ function perguntasQuizz(dados){
 }
 
 function abrirFormularioAoClicar(element, pergID){
+    console.log(question)
+    if(question.answers.length >= 2 && question.title.length > 0 && question.title.length > 0){
     let perguntasQuizzForm = document.querySelectorAll(".perguntas-quiz .caixa-formulario")
    
     perguntasQuizzForm.forEach(pergunta => {
         if(pergunta.getAttribute("id") !== pergID){
             pergunta.classList.add("recolhido")
-            pergunta.setAttribute("onclick", `abrirFormularioAoClicar(this, ${pergunta.getAttribute("id")})`)
             pergunta.innerHTML = `
             <label for="pergunta">Pergunta ${pergunta.getAttribute("id")}</label>
             <ion-icon name="create-outline"></ion-icon>
@@ -300,17 +240,13 @@ function abrirFormularioAoClicar(element, pergID){
         }
     })
 
-    if(!formsPreenchido.includes(perguntaAnterior)){
-        formsPreenchido.push(perguntaAnterior)
         questions.push({...question})
         question = {
             title: "",
             color: "",
             answers: []
         }
-        perguntaAnterior=pergID;
-    }
-
+        console.log(questions)
    element.classList.remove("recolhido")
    element.removeAttribute("onclick")
     element.innerHTML = `
@@ -348,6 +284,9 @@ function abrirFormularioAoClicar(element, pergID){
     </div>
 </div>
     `
+    } else {
+        alert("Você não cumpriu todos os requisitos.")
+    }
 }
 
 function niveisTela3(){		
@@ -355,20 +294,20 @@ function niveisTela3(){
     let perguntasQuiz = document.querySelector('.perguntas-quiz');
     let niveisQuiz = document.querySelector('.niveis-quiz');
 
-    if(questions.length === quizzInfoIniciais.qtdPerguntas - 1 && question.title){
+    if(questions.length === quizzInfoIniciais.qtdPerguntas - 1 && question.title.length > 0 && question.color.length > 0 && question.answers.length >= 2){
         questions.push({...question})
+    }
+    
+    if(questions.length === quizzInfoIniciais.qtdPerguntas){
         quizzCreate.questions.push(...questions)
         console.log(quizzCreate)
         perguntasQuiz.classList.add('hidden');
         niveisQuiz.classList.remove('hidden');
         niveisQuizz()
-    }        
+    }
 }
 
-let formsPreenchido = [];
-let perguntaAnterior = 1;
-
-function infoQuizzPerguntas(id=1){
+function infoQuizzPerguntas(){
     let pergunta = document.querySelector(`.perguntas-quiz input[name="pergunta"]`).value
     let cor = document.querySelector(`.perguntas-quiz .caixa-formulario input[name="cor"]`).value
     let respostaCorreta = document.querySelector(`.perguntas-quiz .caixa-formulario input[name="correta"]`).value
@@ -386,7 +325,6 @@ function infoQuizzPerguntas(id=1){
     let respostaIncorreta3Text = respostaIncorreta3.children[0].value
     let respostaIncorreta3imagem = respostaIncorreta3.children[1].value
 
-    if(!formsPreenchido.includes(id)){
         if(pergunta.length >= 20){
             question.title = pergunta    
         }
@@ -428,13 +366,10 @@ function infoQuizzPerguntas(id=1){
                 answer.isCorrectAnswer = false
                 answer.image = respostaIncorreta3imagem
             if(!question.answers.some(resp => resp.text === answer.text)){
-                question.answers.push(answer)
+                question.answers.push(...answer)
             }
         }
-    } else {
-        return;
-    }
-    console.log(questions) 
+    console.log(question) 
 }
 
 function niveisQuizz(){
@@ -442,17 +377,17 @@ function niveisQuizz(){
     
     niveisQuiz.innerHTML = `
     <h1>Agora, decida os níveis</h1>
-    <div class="caixa-formulario" id=1 onclick="abrirNivelAoClicar(this, 1)">
+    <div class="caixa-formulario" id=1 >
         <label for="nivel">Nível 1</label>
         <div class="centralizando-filho">
-            <input type="text" name="nivel" placeholder="Título do nível">
-            <input type="text" name="acerto" placeholder="% de acerto mínima">
-            <input type="text" name="imagem" placeholder="URL da imagem do nível">
-            <input type="text" name="descrição" placeholder="Descrição do nível">
+            <input type="text" name="nivel" placeholder="Título do nível" onchange="infoQuizzLevels(1)">
+            <input type="text" name="acerto" placeholder="% de acerto mínima" onchange="infoQuizzLevels(1)">
+            <input type="text" name="imagem" placeholder="URL da imagem do nível" onchange="infoQuizzLevels(1)">
+            <input type="text" name="descricao" placeholder="Descrição do nível" onchange="infoQuizzLevels(1)">
         </div>
     </div>
     `
-    console.log(quizzInfoIniciais.qtdNiveis)
+
     for(let i=1; i < quizzInfoIniciais.qtdNiveis; i++){
         niveisQuiz.innerHTML += `
         <div class="caixa-formulario recolhido" id=${i+1} onclick="abrirNivelAoClicar(this, ${i+1})">
@@ -461,34 +396,67 @@ function niveisQuizz(){
     </div>
         `
     }
+    niveisQuiz.innerHTML += `<button onclick="sucessoTela3()" class="botao-color">Finalizar Quizz</button>`
+}
+
+function infoQuizzLevels(){
+    let titulo = document.querySelector(".niveis-quiz .caixa-formulario input[name='nivel']").value
+    let acerto = Number(document.querySelector(".niveis-quiz .caixa-formulario input[name='acerto']").value)
+    let imagem = document.querySelector(".niveis-quiz .caixa-formulario input[name='imagem']").value
+    let descricao = document.querySelector(".niveis-quiz .caixa-formulario input[name='descricao']").value
+
+    let validarAcerto = (acerto >= 0) && acerto <= 100 && !isNaN(acerto)
+
+    if(titulo.length >= 10 && validarAcerto && descricao.length >= 30 && imagem.length > 0){
+        
+        if(!levels.some(lev => lev.title === titulo)){
+            level.text = descricao
+            level.minValue = acerto
+            level.title = titulo
+            level.image = imagem
+        }
+    }
+    console.log(level)
+    console.log(levels)
 }
 
 function abrirNivelAoClicar(element, nivelID){
-    console.log(element)
+
+    if(level.image.length >0 && level.text.length > 0 && level.title.length > 0 && level.minValue >=0){
     let nivelQuizzForm = document.querySelectorAll(".niveis-quiz .caixa-formulario")
 
     nivelQuizzForm.forEach(nivel => {
         if(nivel.getAttribute("id") !== nivelID){
             nivel.classList.add("recolhido")
-            nivel.setAttribute("onclick", `abrirNivelAoClicar(this, ${nivel.getAttribute("id")})`)
             nivel.innerHTML = `
             <label for="pergunta">Nivel ${nivel.getAttribute("id")}</label>
             <ion-icon name="create-outline"></ion-icon>
             `
         }
     })
+    
+    levels.push({...level})
+    level = {
+        title: "",
+        image: "",
+        text: "",
+        minValue: ""
+        }
 
     element.classList.remove("recolhido")
     element.removeAttribute("onclick")
     element.innerHTML = `
     <label for="nivel">Nível ${nivelID}</label>
     <div class="centralizando-filho">
-        <input type="text" name="nivel" placeholder="Título do nível">
-        <input type="text" name="acerto" placeholder="% de acerto mínima">
-        <input type="text" name="imagem" placeholder="URL da imagem do nível">
-        <input type="text" name="descrição" placeholder="Descrição do nível">
+        <input type="text" name="nivel" placeholder="Título do nível" onchange="infoQuizzLevels(${nivelID})">
+        <input type="text" name="acerto" placeholder="% de acerto mínima" onchange="infoQuizzLevels(${nivelID})">
+        <input type="text" name="imagem" placeholder="URL da imagem do nível" onchange="infoQuizzLevels(${nivelID})">
+        <input type="text" name="descricao" placeholder="Descrição do nível" onchange="infoQuizzLevels(${nivelID})">
     </div>
     `
+    } else {
+        alert('Você não cumpriu todos os requisitos')
+    }
 }
 
 function sucessoTela3(){    
@@ -496,8 +464,16 @@ function sucessoTela3(){
     let niveisQuiz = document.querySelector('.niveis-quiz');
     let sucessoQuiz = document.querySelector('.sucesso-quiz');    
 
-    niveisQuiz.classList.add('hidden'); 
-    sucessoQuiz.classList.remove('hidden');   
+    if(levels.length === quizzInfoIniciais.qtdNiveis - 1 && level.text.length > 0 && level.title.length > 0 && level.image.length > 0){
+        levels.push({...level}) 
+    }
+    if(levels.length === quizzInfoIniciais.qtdNiveis){
+        quizzCreate.levels.push(...levels)
+        createQuizz();
+        levels = [];
+        niveisQuiz.classList.add('hidden')
+        sucessoQuiz.classList.remove('hidden')
+    }  
 }
 
 function voltarHome(){    
@@ -537,5 +513,3 @@ function quizzTela2(){
         })
     }
 }
-
-/* ------------validação dos formularios---------------*/
