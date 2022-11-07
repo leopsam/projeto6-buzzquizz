@@ -679,8 +679,23 @@ function resultadoFinalQuizz(){
     calculo = Math.ceil(calculo)
     console.log(calculo);
 
+    let valores = [];
+    console.log(valores);
+
     for(let i=0; i<quizzUniRend.levels.length; i++){
-        if(quizzUniRend.levels[i].minValue <= calculo){
+        valores.push(quizzUniRend.levels[i].minValue);
+    }
+    
+
+
+    const maxValue = valores.reduce(function(prev, current) { 
+        return prev > current ? prev : current; 
+    });
+
+
+    if(calculo >= maxValue){
+        for(let i=0; i<quizzUniRend.levels.length; i++){
+         if(quizzUniRend.levels[i].minValue == maxValue){
 
             telaFinalQizz = `   <div class="fim-quizz invisivel">
                                         <h3>${quizzUniRend.levels[i].minValue}% ${quizzUniRend.levels[i].title}</h3> 
@@ -693,11 +708,32 @@ function resultadoFinalQuizz(){
                                     <button class="botao-color" onclick="reiniciaQuizz()">Reiniciar Quizz</button>
                                     <button onclick="voltarHome()" class="botao-retorno">Voltar pra home</button>`;
 
+            }
+        
         }
+    }else{
+        for(let i=0; i<quizzUniRend.levels.length; i++){
+            if(quizzUniRend.levels[i].minValue == 0){
+   
+               telaFinalQizz = `   <div class="fim-quizz invisivel">
+                                           <h3>${quizzUniRend.levels[i].minValue}% ${quizzUniRend.levels[i].title}</h3> 
+                                           
+                                           <div class="container">        
+                                               <img src="${quizzUniRend.levels[i].image}" />
+                                               <p>${quizzUniRend.levels[i].text}</p>                
+                                           </div>
+                                       </div>
+                                       <button class="botao-color" onclick="reiniciaQuizz()">Reiniciar Quizz</button>
+                                       <button onclick="voltarHome()" class="botao-retorno">Voltar pra home</button>`;
+   
+               }
+           
+           }
     }
 
     telaQuizz.innerHTML += telaFinalQizz;   
 }
+
 
 function reiniciaQuizz(){
     quizzUni(recaregar);
@@ -904,4 +940,3 @@ function respostaCadastraChegou(resposta){
 function respostaCadastraErro(resposta){
     console.log('erro cadastrado')
 }
-
