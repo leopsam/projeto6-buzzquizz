@@ -344,7 +344,7 @@ function infoQuizzPerguntas(){
             question.color = cor;
         }
     
-        if(respostaCorreta && imagemRespostaCorreta){
+        if(respostaCorreta && imagemRespostaCorreta && !question.answers.some(ans => ans.isCorrectAnswer === true)){
             answer.isCorrectAnswer = true
             answer.text = respostaCorreta
             answer.image = imagemRespostaCorreta
