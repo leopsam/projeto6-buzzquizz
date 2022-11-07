@@ -12,7 +12,7 @@
     --fonte-principal: 'Roboto', sans-serif;
 }
 
-* {
+*{
     box-sizing: border-box;
 }
 
@@ -66,6 +66,5 @@ header h1{
 }
 
 .botao-color:hover{
-    background-color: #d43129;
+    background-color: #d43129;    
 }
-

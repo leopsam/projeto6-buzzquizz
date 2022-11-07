@@ -1,75 +1,87 @@
-main.tela1 {
-    padding-top: 100px;
-    padding-bottom: 100px;
+/*---------TELAS LISTA QUIZZES (TELA 1)---------*/
+.tela1{
+    margin-top: 120px;   
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
 }
 
-.tela1-noQuizz {
-    width: 340px;
-    margin-bottom: 20px;
-    max-width: 1100px;
+.cabecalho-tela1{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 1080px;
     height: 181px;
     border: 1px dashed #D5D5D5;
     border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
 }
 
-.tela1-noQuizz p {
+.cabecalho-tela1 h1{
+    font-style: normal;
     font-weight: 400;
     font-size: 20px;
+    line-height: 23px;
     color: #B9B9B9;
-    text-align: center;
 }
 
-.tela1-noQuizz button {
+.cabecalho-tela1 button{
     width: 151px;
     height: 40px;
-    background: var(--cinza-fundo);
+    left: 645px;
+    top: 254px;
     border: 1px dashed var(--vermelho);
-    border-radius: 50px;
+    background-color: var(--cinza-fundo);
+    font-style: normal;
     font-weight: 400;
     font-size: 21px;
     line-height: 25px;
     color: var(--vermelho);
+    border-radius: 50px;
+    margin-top: 20px;
     cursor: pointer;
 }
 
-main.tela1 article {
-    width: 100%;
-    max-width: 1100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-article .tela1-containerTitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 340px;
-    margin-bottom: 12px;
-}
-
-article .tela1-containerTitle h1{
-    font-weight: 700;
-    font-size: 20px;
-    color: #000000;
-    width: 340px;
-}
-
-article .tela1-containerTitle ion-icon {
-    font-size: 34px;
+.usuario ion-icon{
+    width: 31px;
+    height: 30px;
     color: var(--vermelho);
     cursor: pointer;
 }
 
-article .tela1-containerQuizz {
+.quizes-user {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.container-quiz{
+    margin: 50px 0;
+    width: 1080px;
+}
+
+.container-quiz .titulo{
+    display: flex;
+}
+
+.container-quiz h1{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin: 5px 10px;
+    
+}
+
+.tela1-quizz img{
+    width: 100%;
+    height: 181px;
+    border-radius: 5px;
+}
+
+.tela1-containerQuizz {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -82,13 +94,11 @@ article .tela1-containerQuizz {
     max-width: 340px;
     cursor: pointer;
     height: fit-content;
-}
-.tela1-quizz img {
-    border-radius: 5px;
-    width: 100%;
+    margin: 10px;
+    
 }
 
-.tela1-quizz .tela1-gradientQuizz {
+.tela1-quizz .gradientQuizz {
     position: absolute;
     top: 0;
     left: 0;
@@ -111,16 +121,23 @@ article .tela1-containerQuizz {
     word-wrap: break-word;
 }
 
+.quizes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
 
 /*--------TELAS PAGINA DE QUIZZ (TELA 2)--------*/
 .banner{
     margin-top: 69px;
-    width: 100%;
+    width: 97vw;
     height: 227px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)), url(https://wallpaperboat.com/wp-content/uploads/2020/08/12/52469/hogwarts-castle-11.jpg);
+    background-position: contain;
+    box-sizing: border-box;
 }
 
 .banner h2{
@@ -131,7 +148,6 @@ article .tela1-containerQuizz {
 }
 
 .quizz-selecionado{
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -148,7 +164,7 @@ article .tela1-containerQuizz {
 .card-quizz{
     background-color: var(--branco);
     width: 759px;
-    height: 676px;
+    padding-bottom: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     margin: 20px 0;
 }
@@ -172,10 +188,12 @@ article .tela1-containerQuizz {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    box-sizing: border-box;
 }
 .card-quizz .respostas .item{
     margin: 15px;
+    cursor: pointer;
+    box-sizing: border-box;
 }
 
 .card-quizz .respostas img{
@@ -188,8 +206,9 @@ article .tela1-containerQuizz {
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
-    line-height: 23px;
     margin-top: 10px;
+    word-wrap: break-word;
+    width: 330px;
 }
 
 .certo-errado-desmarcado{
@@ -255,17 +274,18 @@ article .tela1-containerQuizz {
     justify-content: center;
     align-items: center;
     margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 .caixa-formulario{
     display: flex;
     flex-direction: column;    
-    background-color: var(--cinza-input); /*888*/
-    padding: 10px;
+    background-color: var(--branco);  
+    padding: 5px;
     margin-bottom: 30px;
 }
 
-.centralizando-filho{
+.centralizando-filho{    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -286,15 +306,32 @@ article .tela1-containerQuizz {
     border: 1px solid var(--cinza-input);
     border-radius: 5px;
     margin: 5px;
+    padding: 0 15px;
+    color: #5a5a5a;;
+    font-family: var(--fonte-principal);
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.input{
+    width: 564px;
+    height: 46px;
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-input);
+    border-radius: 5px;
+    margin: 5px;
 }
 
 .formulario input::placeholder{
     color: var(--cinza-input);
-    padding-left: 15px;
     font-family: var(--);
     font-style: italic;
     font-weight: 400;
     font-size: 19px;
+}
+
+.formulario input:focus{
+    outline: solid var(--vermelho) 2px;
 }
 
 .formulario label{   
@@ -308,9 +345,8 @@ article .tela1-containerQuizz {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    width: 601px;
-    box-sizing: border-box;
+    justify-content: space-between;     
+    width: 584px;
 }
 
 .formulario ion-icon{
@@ -345,50 +381,35 @@ article .tela1-containerQuizz {
 }
 
 .hidden{
-    display: none!important;
+    display: none;
 }
 
-@media (min-width: 1100px){
-
-    article .tela1-containerTitle {
-        width: 178px;
-    }
-}
-
-@media (min-width: 712px){
-    .tela1-noQuizz {
-        width: 100%;
-        max-width: 690px;
-    }
-
-    main.tela1 .tela1-everyQuizz .tela1-containerTitle{
-        width: 100%;
-        max-width: 690px;
-    }
-
-    article .tela1-containerTitle {
-        width: 178px;
-    }
-}
-
-@media (min-width: 1067px){
-    .tela1-noQuizz {
-        width: 100%;
-        max-width: 1050px;
-    }
-    main.tela1 .tela1-everyQuizz .tela1-containerTitle{
-        width: 100%;
-        max-width: 1050px;
-    }
-}
-       
 @media screen and (max-width: 1100px) {
-
-    /*--------TELAS DE CRIAÇÃO DO QUIZZ (TELA 3)--------*/
-    article .tela1-containerQuizz {
-        justify-content: center;
+    /*---------TELAS LISTA QUIZZES (TELA 1)---------*/
+    .cabecalho-tela1{
+        width: 90%;        
     }
 
+    .container-quiz{
+        width: 90%;
+    }
+
+    .quizes{
+        justify-content: center;
+        align-items: center;
+    }
+
+    .quizes-user {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tela1-quizz{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /*--------TELAS DE CRIAÇÃO DO QUIZZ (TELA 3)--------*/    
     .formulario h1{
         font-size: 20px;
     }
@@ -398,7 +419,7 @@ article .tela1-containerQuizz {
     }
 
     .caixa-formulario{
-        width: 100%;       
+        width: 97%;       
     }  
     
     .formulario label{   
@@ -409,7 +430,7 @@ article .tela1-containerQuizz {
     }
     
     .formulario .recolhido{
-        width: 100%;
+        width: 97%;
     }
     
     .formulario ion-icon{
@@ -448,7 +469,6 @@ article .tela1-containerQuizz {
 
     .card-quizz{       
         width: 375px;
-        height: 436px;
     }
     
     .card-quizz h3{
@@ -469,13 +489,13 @@ article .tela1-containerQuizz {
     }
     
     .card-quizz .respostas p{
-        font-size: 13px;  
+        font-size: 13px;
+        width: 163px;  
     }
 
     .fim-quizz{
         width: 375px;
         height: 500px;
-        margin-bottom: 200px;
     }
 
     .fim-quizz h3{
