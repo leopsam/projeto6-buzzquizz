@@ -626,7 +626,7 @@ function correcaoResposta(resposta){
         //console.log(erradas);
 
         for(let i=0; i<erradas.length; i++){
-            erradas[i].classList.add('certo-errado-desmarcado')
+            erradas[i].classList.add('certo-errado-desmarcado');
         }
        
 
@@ -698,7 +698,7 @@ function resultadoFinalQuizz(){
          if(quizzUniRend.levels[i].minValue == maxValue){
 
             telaFinalQizz = `   <div class="fim-quizz invisivel">
-                                        <h3>${quizzUniRend.levels[i].minValue}% ${quizzUniRend.levels[i].title}</h3> 
+                                        <h3>${calculo}% ${quizzUniRend.levels[i].title}</h3> 
                                         
                                         <div class="container">        
                                             <img src="${quizzUniRend.levels[i].image}" />
@@ -716,7 +716,7 @@ function resultadoFinalQuizz(){
             if(quizzUniRend.levels[i].minValue == 0){
    
                telaFinalQizz = `   <div class="fim-quizz invisivel">
-                                           <h3>${quizzUniRend.levels[i].minValue}% ${quizzUniRend.levels[i].title}</h3> 
+                                           <h3>${calculo}% ${quizzUniRend.levels[i].title}</h3> 
                                            
                                            <div class="container">        
                                                <img src="${quizzUniRend.levels[i].image}" />
