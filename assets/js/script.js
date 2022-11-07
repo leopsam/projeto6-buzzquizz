@@ -18,6 +18,8 @@ let question = {
     answers: []
 }
 
+let questions = []
+
 let level = {
     title: "",
     image: "",
@@ -26,28 +28,76 @@ let level = {
 }
 
 
-let quizzCreate = {
-	title: "",
-	image: "",
-	questions: [
-		{
-			title: "",
-			color: "",
-			answers: []
-		},
-		{
-			title: "",
-			color: "",
-			answers: []
-		},
-		{
-			title: "",
-			color: "",
-			answers: []
-		}
-	],
-	levels: []
+let quizzCreate =  {
+title: "Ps4 vs Xbox 3 meu",
+image: "https://www.teahub.io/photos/full/332-3321569_xbox-one-ps4-xbox-and-playstation-logos.jpg",
+questions: [
+    {
+        title: "Título da pergunta 1",
+        color: "#123456",
+        answers: [
+            {
+                text: "Texto da resposta 1",
+                image: "https://http.cat/411.jpg",
+                isCorrectAnswer: true
+            },
+            {
+                text: "Texto da resposta 2",
+                image: "https://http.cat/412.jpg",
+                isCorrectAnswer: false
+            }
+        ]
+    },
+    {
+        title: "Título da pergunta 2",
+        color: "#123456",
+        answers: [
+            {
+                text: "Texto da resposta 1",
+                image: "https://http.cat/411.jpg",
+                isCorrectAnswer: true
+            },
+            {
+                text: "Texto da resposta 2",
+                image: "https://http.cat/412.jpg",
+                isCorrectAnswer: false
+            }
+        ]
+    },
+    {
+        title: "Título da pergunta 3",
+        color: "#123456",
+        answers: [
+            {
+                text: "Texto da resposta 1",
+                image: "https://http.cat/411.jpg",
+                isCorrectAnswer: true
+            },
+            {
+                text: "Texto da resposta 2",
+                image: "https://http.cat/412.jpg",
+                isCorrectAnswer: false
+            }
+        ]
+    }
+],
+levels: [
+    {
+        title: "Título do nível 1",
+        image: "https://http.cat/411.jpg",
+        text: "Descrição do nível 1",
+        minValue: 0
+    },
+    {
+        title: "Título do nível 2",
+        image: "https://http.cat/412.jpg",
+        text: "Descrição do nível 2",
+        minValue: 50
+    }
+]
 }
+
+let quizzInfoIniciais = {}
 
 let = quizzUni = {};
 
@@ -57,8 +107,9 @@ getQuizzes();
 
 function getLocalStorageQuizzes(){
     let quizzesLocalStorage = localStorage.getItem("quizzes")
+    console.log(quizzesLocalStorage)
     if(quizzesLocalStorage){
-        quizzesStorage.push(...JSON.stringify(quizzesLocalStorage))
+        quizzesStorage.push(...JSON.parse(quizzesLocalStorage))
     }
 }
 
@@ -87,9 +138,9 @@ function getUniqueQuizz(id){
 function createQuizz(){
     let promisse = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", quizzCreate)
     promisse.then((response) => {
-        console.log(response.status)
             quizzesStorage.push(response.data)
-            localStorage.setItem("quizzes", quizzesStorage)
+            console.log(quizzesStorage)
+            localStorage.setItem("quizzes", JSON.stringify(quizzesStorage))
             quizzCreate = {
                 title: "",
                 image: "",
@@ -118,9 +169,11 @@ function createQuizz(){
     })
 }
 
+createQuizz()
+
 function handleQuizzes(){
     quizzEveryElement.innerHTML = ""
-    if(quizzesStorage.length){
+    if(quizzesStorage.length > 0){
         quizzUserContainerElement.innerHTML = ""
         noQuizzElemet.classList.add("hidden")        
         quizzesStorage.forEach(quizz => {
@@ -135,7 +188,6 @@ function handleQuizzes(){
     } else {
         noQuizzElemet.classList.remove("hidden")
         quizzUserElement.classList.add("hidden")
-        console.log(quizzUserElement)
     }
 
         quizzes.forEach(quizz => {
@@ -175,9 +227,11 @@ function infoCadastroQuizz(){
     let imagemQuizz = document.querySelector(".info-basico input[name='imagem']").value
     let qtdPerguntas = Number(document.querySelector(".info-basico input[name='perguntas']").value)
     let qtdNiveis = Number(document.querySelector(".info-basico input[name='niveis']").value)
-    console.log(qtdNiveis)
     if((tituloQuizz.length >=20) && (tituloQuizz.length <= 65) && imagemQuizz && qtdPerguntas >= 3 && qtdNiveis >= 2){
         perguntasTela3({titulo: tituloQuizz, imagem: imagemQuizz, qtdPerguntas, qtdNiveis})
+        quizzCreate.image = imagemQuizz
+        quizzCreate.title = tituloQuizz
+        quizzInfoIniciais = {titulo: tituloQuizz, imagem: imagemQuizz, qtdPerguntas, qtdNiveis}
     }
 }
 
@@ -186,37 +240,37 @@ function perguntasQuizz(dados){
     perguntasQuizz.innerHTML = ""
     perguntasQuizz.innerHTML = `
     <h1>Crie suas perguntas</h1>
-                <div class="caixa-formulario" id="1" onclick="abrirFormularioAoClicar(this, 1)">
+                <div class="caixa-formulario" id="1">
 
                     <label for="pergunta">Pergunta 1</label>
                     <div class="centralizando-filho">
-                        <input type="text" name="pergunta" placeholder="Texto da pergunta">
-                        <input type="text" name="cor" placeholder="Cor de fundo da pergunta">
+                        <input type="text" name="pergunta" placeholder="Texto da pergunta" onchange="infoQuizzPerguntas(1)">
+                        <input type="text" name="cor" placeholder="Cor de fundo da pergunta" onchange="infoQuizzPerguntas(1)">
                     </div>
 
                     <label for="pergunta">Resposta correta</label>
                     <div class="centralizando-filho">
-                        <input type="text" name="correta" placeholder="Resposta correta">
-                        <input type="text" name="imagem" placeholder="URL da imagem">
+                        <input type="text" name="correta" placeholder="Resposta correta" onchange="infoQuizzPerguntas(1)">
+                        <input type="text" name="imagem" placeholder="URL da imagem" onchange="infoQuizzPerguntas(1)">
                     </div>
 
                     <label for="pergunta">Respostas incorretas</label>
                     <div class="centralizando-filho">
-                        <input type="text" name="correta" placeholder="Resposta incorreta 1">
-                        <input type="text" name="imagem" placeholder="URL da imagem 1">
+                        <input type="text" name="correta" placeholder="Resposta incorreta 1" onchange="infoQuizzPerguntas(1)">
+                        <input type="url" name="imagem" placeholder="URL da imagem 1" onchange="infoQuizzPerguntas(1)">
                     </div>
 
                     <div class="espaco"></div>
 
                     <div class="centralizando-filho">
-                        <input type="text" name="correta" placeholder="Resposta incorreta 2">
-                        <input type="text" name="imagem" placeholder="URL da imagem 2">
+                        <input type="text" name="correta" placeholder="Resposta incorreta 2" onchange="infoQuizzPerguntas(1)">
+                        <input type="text" name="imagem" placeholder="URL da imagem 2" onchange="infoQuizzPerguntas(1)">
                     </div>
 
                     <div class="espaco"></div>
                     <div class="centralizando-filho">
-                        <input type="text" name="correta" placeholder="Resposta incorreta 3">
-                        <input type="text" name="imagem" placeholder="URL da imagem 3">
+                        <input type="text" name="correta" placeholder="Resposta incorreta 3" onchange="infoQuizzPerguntas(1)">
+                        <input type="text" name="imagem" placeholder="URL da imagem 3" onchange="infoQuizzPerguntas(1)">
                     </div>
                 </div>
     `
@@ -238,6 +292,7 @@ function abrirFormularioAoClicar(element, pergID){
     perguntasQuizzForm.forEach(pergunta => {
         if(pergunta.getAttribute("id") !== pergID){
             pergunta.classList.add("recolhido")
+            pergunta.setAttribute("onclick", `abrirFormularioAoClicar(this, ${pergunta.getAttribute("id")})`)
             pergunta.innerHTML = `
             <label for="pergunta">Pergunta ${pergunta.getAttribute("id")}</label>
             <ion-icon name="create-outline"></ion-icon>
@@ -245,39 +300,51 @@ function abrirFormularioAoClicar(element, pergID){
         }
     })
 
-   
+    if(!formsPreenchido.includes(perguntaAnterior)){
+        formsPreenchido.push(perguntaAnterior)
+        questions.push({...question})
+        question = {
+            title: "",
+            color: "",
+            answers: []
+        }
+        perguntaAnterior=pergID;
+    }
+
+   element.classList.remove("recolhido")
+   element.removeAttribute("onclick")
     element.innerHTML = `
     <div class="caixa-formulario" id="${pergID}">
 
     <label for="pergunta">Pergunta ${pergID}</label>
     <div class="centralizando-filho">
-        <input type="text" name="pergunta" placeholder="Texto da pergunta">
-        <input type="text" name="cor" placeholder="Cor de fundo da pergunta">
+        <input type="text" name="pergunta" placeholder="Texto da pergunta" onchange="infoQuizzPerguntas(${pergID})">
+        <input type="text" name="cor" placeholder="Cor de fundo da pergunta" onchange="infoQuizzPerguntas(${pergID})">
     </div>
 
     <label for="pergunta">Resposta correta</label>
     <div class="centralizando-filho">
-        <input type="text" name="correta" placeholder="Resposta correta">
-        <input type="text" name="imagem" placeholder="URL da imagem">
+        <input type="text" name="correta" placeholder="Resposta correta" onchange="infoQuizzPerguntas(${pergID})">
+        <input type="text" name="imagem" placeholder="URL da imagem" onchange="infoQuizzPerguntas(${pergID})">
     </div>
 
     <label for="pergunta">Respostas incorretas</label>
     <div class="centralizando-filho">
-        <input type="text" name="correta" placeholder="Resposta incorreta 1">
-        <input type="text" name="imagem" placeholder="URL da imagem 1">
+        <input type="text" name="correta" placeholder="Resposta incorreta 1" onchange="infoQuizzPerguntas(${pergID})">
+        <input type="text" name="imagem" placeholder="URL da imagem 1" onchange="infoQuizzPerguntas(${pergID})">
     </div>
 
     <div class="espaco"></div>
 
     <div class="centralizando-filho">
-        <input type="text" name="correta" placeholder="Resposta incorreta 2">
-        <input type="text" name="imagem" placeholder="URL da imagem 2">
+        <input type="text" name="correta" placeholder="Resposta incorreta 2" onchange="infoQuizzPerguntas(${pergID})">
+        <input type="text" name="imagem" placeholder="URL da imagem 2" onchange="infoQuizzPerguntas(${pergID})">
     </div>
 
     <div class="espaco"></div>
     <div class="centralizando-filho">
-        <input type="text" name="correta" placeholder="Resposta incorreta 3">
-        <input type="text" name="imagem" placeholder="URL da imagem 3">
+        <input type="text" name="correta" placeholder="Resposta incorreta 3" onchange="infoQuizzPerguntas(${pergID})">
+        <input type="text" name="imagem" placeholder="URL da imagem 3" onchange="infoQuizzPerguntas(${pergID})">
     </div>
 </div>
     `
@@ -287,9 +354,141 @@ function niveisTela3(){
     
     let perguntasQuiz = document.querySelector('.perguntas-quiz');
     let niveisQuiz = document.querySelector('.niveis-quiz');
+
+    if(questions.length === quizzInfoIniciais.qtdPerguntas - 1 && question.title){
+        questions.push({...question})
+        quizzCreate.questions.push(...questions)
+        console.log(quizzCreate)
+        perguntasQuiz.classList.add('hidden');
+        niveisQuiz.classList.remove('hidden');
+        niveisQuizz()
+    }        
+}
+
+let formsPreenchido = [];
+let perguntaAnterior = 1;
+
+function infoQuizzPerguntas(id=1){
+    let pergunta = document.querySelector(`.perguntas-quiz input[name="pergunta"]`).value
+    let cor = document.querySelector(`.perguntas-quiz .caixa-formulario input[name="cor"]`).value
+    let respostaCorreta = document.querySelector(`.perguntas-quiz .caixa-formulario input[name="correta"]`).value
+    let imagemRespostaCorreta = document.querySelectorAll(`.perguntas-quiz input[name="imagem"]`)[0].value
+    let respostaIncorreta1 = document.querySelectorAll(`.perguntas-quiz .caixa-formulario .centralizando-filho`)[2]
+    let respostaIncorreta2 = document.querySelectorAll(`.perguntas-quiz .caixa-formulario .centralizando-filho`)[3]
+    let respostaIncorreta3 = document.querySelectorAll(`.perguntas-quiz .caixa-formulario .centralizando-filho`)[4]
+
+    let respostaIncorreta1Text = respostaIncorreta1.children[0].value
+    let respostaIncorreta1imagem = respostaIncorreta1.children[1].value
+
+    let respostaIncorreta2Text = respostaIncorreta2.children[0].value
+    let respostaIncorreta2imagem = respostaIncorreta2.children[1].value
+
+    let respostaIncorreta3Text = respostaIncorreta3.children[0].value
+    let respostaIncorreta3imagem = respostaIncorreta3.children[1].value
+
+    if(!formsPreenchido.includes(id)){
+        if(pergunta.length >= 20){
+            question.title = pergunta    
+        }
     
-    perguntasQuiz.classList.add('hidden');
-    niveisQuiz.classList.remove('hidden');    
+        const regexHex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
+        if(regexHex.test(cor)){
+            question.color = cor;
+        }
+    
+        if(respostaCorreta && imagemRespostaCorreta){
+            answer.isCorrectAnswer = true
+            answer.text = respostaCorreta
+            answer.image = imagemRespostaCorreta
+            if(!question.answers.some(resp => resp.text === answer.text)){
+                question.answers.push({...answer});
+            }
+        }
+    
+        if(respostaIncorreta1Text && respostaIncorreta1imagem){
+            answer.text = respostaIncorreta1Text
+            answer.isCorrectAnswer = false
+            answer.image = respostaIncorreta1imagem
+            if(!question.answers.some(resp => resp.text === answer.text)){
+                question.answers.push({...answer})
+            }
+        }
+    
+        if(respostaIncorreta2Text && respostaIncorreta2imagem){
+            answer.text = respostaIncorreta2Text
+            answer.isCorrectAnswer = false
+            answer.image = respostaIncorreta2imagem
+            if(!question.answers.some(resp => resp.text === answer.text)){
+            question.answers.push({...answer})
+            }
+        }
+    
+        if(respostaIncorreta3Text && respostaIncorreta3imagem){
+                answer.text = respostaIncorreta3Text
+                answer.isCorrectAnswer = false
+                answer.image = respostaIncorreta3imagem
+            if(!question.answers.some(resp => resp.text === answer.text)){
+                question.answers.push(answer)
+            }
+        }
+    } else {
+        return;
+    }
+    console.log(questions) 
+}
+
+function niveisQuizz(){
+    let niveisQuiz = document.querySelector('.niveis-quiz');
+    
+    niveisQuiz.innerHTML = `
+    <h1>Agora, decida os níveis</h1>
+    <div class="caixa-formulario" id=1 onclick="abrirNivelAoClicar(this, 1)">
+        <label for="nivel">Nível 1</label>
+        <div class="centralizando-filho">
+            <input type="text" name="nivel" placeholder="Título do nível">
+            <input type="text" name="acerto" placeholder="% de acerto mínima">
+            <input type="text" name="imagem" placeholder="URL da imagem do nível">
+            <input type="text" name="descrição" placeholder="Descrição do nível">
+        </div>
+    </div>
+    `
+    console.log(quizzInfoIniciais.qtdNiveis)
+    for(let i=1; i < quizzInfoIniciais.qtdNiveis; i++){
+        niveisQuiz.innerHTML += `
+        <div class="caixa-formulario recolhido" id=${i+1} onclick="abrirNivelAoClicar(this, ${i+1})">
+        <label for="nivel">Nível ${i+1}</label>
+        <ion-icon name="create-outline"></ion-icon>
+    </div>
+        `
+    }
+}
+
+function abrirNivelAoClicar(element, nivelID){
+    console.log(element)
+    let nivelQuizzForm = document.querySelectorAll(".niveis-quiz .caixa-formulario")
+
+    nivelQuizzForm.forEach(nivel => {
+        if(nivel.getAttribute("id") !== nivelID){
+            nivel.classList.add("recolhido")
+            nivel.setAttribute("onclick", `abrirNivelAoClicar(this, ${nivel.getAttribute("id")})`)
+            nivel.innerHTML = `
+            <label for="pergunta">Nivel ${nivel.getAttribute("id")}</label>
+            <ion-icon name="create-outline"></ion-icon>
+            `
+        }
+    })
+
+    element.classList.remove("recolhido")
+    element.removeAttribute("onclick")
+    element.innerHTML = `
+    <label for="nivel">Nível ${nivelID}</label>
+    <div class="centralizando-filho">
+        <input type="text" name="nivel" placeholder="Título do nível">
+        <input type="text" name="acerto" placeholder="% de acerto mínima">
+        <input type="text" name="imagem" placeholder="URL da imagem do nível">
+        <input type="text" name="descrição" placeholder="Descrição do nível">
+    </div>
+    `
 }
 
 function sucessoTela3(){    
@@ -339,6 +538,4 @@ function quizzTela2(){
     }
 }
 
-function renderTela3(){
-
-}
+/* ------------validação dos formularios---------------*/
